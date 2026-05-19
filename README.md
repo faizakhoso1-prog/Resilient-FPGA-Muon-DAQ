@@ -23,7 +23,8 @@ To bridge the gap between nuclear physics instrumentation and **Hardware Cyber-R
 The design was rigorously verified in **Xilinx Vivado Simulator** by generating a stable 100 MHz clock pattern and artificially injecting an SEU (bit-flip) into `Core A` during runtime to test the system's resilience.
 
 ### **Simulation Waveform Result:**
-*(tmr_voter_waveform.png)*
+![Vivado Glitch-Free Simulation Waveform](tmr_voter_waveform.png)
+
 
 ### **Waveform Analysis:**
 - **0 ns – 240 ns (Healthy Run):** All three redundant cores are completely synchronized and healthy, stepping smoothly from State `0` to State `1`, and then to State `2`. The synchronous registration ensures perfectly crisp, sharp transitions without any combinational glitches. The `sig_fault_det` flag remains low (`0`).
