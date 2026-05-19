@@ -23,7 +23,8 @@ To bridge the gap between nuclear physics instrumentation and **Hardware Cyber-R
 The design was rigorously verified in **Xilinx Vivado Simulator** by generating a stable 100 MHz clock pattern and artificially injecting an SEU (bit-flip) into `Core A` during runtime to test the system's resilience.
 
 ### **Simulation Waveform Result:**
-![Vivado Glitch-Free Simulation Waveform](tmr_voter_waveform (3).png)
+![Vivado Glitch-Free Simulation Waveform](tmr_voter_waveform%20%283%29.png)
+
 
 
 
