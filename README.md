@@ -1,2 +1,44 @@
-# Resilient-FPGA-Muon-DAQ
-Fault-Tolerant High-Speed Data Acquisition System for Cosmic Ray Muon Detection using Artix-7.
+# Resilient & Fault-Tolerant High-Speed Cosmic Ray Muon DAQ System
+
+**Platform:** AMD Xilinx Artix-7 (Digilent Nexys 4 DDR) | **Toolchain:** Vivado Design Suite | **Language:** VHDL
+
+## 🚀 Project Overview
+This repository contains the verified design and simulation of a hardware-level **Fault Detection, Isolation, and Recovery (FDIR)** architecture tailored for high-speed nuclear instrumentation. 
+
+Cosmic ray muon detectors are frequently deployed in radiation-heavy or remote environments where they are highly susceptible to radiation-induced **Single Event Upsets (SEUs)**—where high-energy particles flip internal FPGA register bits. Since this system is literally a cosmic ray detector, it is highly vulnerable to self-corruption.
+
+To bridge the gap between nuclear physics instrumentation and **Hardware Cyber-Resilience (Resilience by Design)**, this core implements a fully **Synchronous Triple Modular Redundancy (TMR)** architecture with autonomous majority voter logic and real-time fault telemetry logging.
+
+---
+
+## 🛠️ Architecture & Key Features
+1. **Synchronous Triple Modular Redundancy (TMR):** The critical control state machines of the high-speed pulse counter/Time-to-Digital Converter (TDC) are replicated into three independent hardware cores running in parallel.
+2. **Glitch-Free Majority Voting Logic:** Uses high-speed combinational logic to evaluate the current state via the boolean function `Voted_State = (A AND B) OR (B AND C) OR (A AND C)`. The output is registered synchronously on the rising edge of the system clock, completely eliminating transient hardware hazards and routing propagation glitches.
+3. **Fault Telemetry & FDI Module:** Instantly flags anomalies (`sig_fault_det`) and identifies exactly which redundant hardware core suffered a bit-flip, outputting telemetry data (`sig_faulty_core`) ideal for Security Operation Center (SOC) dashboards or edge system health monitoring.
+4. **Self-Healing Capability:** Enables continuous operations with **zero downtime**, transparently mitigating hardware faults in microseconds without data loss.
+
+---
+
+## 📊 Behavioral Simulation & Fault Injection Verification
+The design was rigorously verified in **Xilinx Vivado Simulator** by generating a stable 100 MHz clock pattern and artificially injecting an SEU (bit-flip) into `Core A` during runtime to test the system's resilience.
+
+### **Simulation Waveform Result:**
+*(tmr_voter_waveform.png)*
+
+### **Waveform Analysis:**
+- **0 ns – 240 ns (Healthy Run):** All three redundant cores are completely synchronized and healthy, stepping smoothly from State `0` to State `1`, and then to State `2`. The synchronous registration ensures perfectly crisp, sharp transitions without any combinational glitches. The `sig_fault_det` flag remains low (`0`).
+- **250 ns (FAULT INJECTION):** A simulated radiation particle strikes the hardware, corrupting `sig_core_A` from State `2` to State `0`. Both `sig_core_B` and `sig_core_C` maintain the valid state `2`.
+- **The Hardware Shield:** The majority voter instantly evaluates the divergence. The registered output `sig_voted` stays perfectly stable at `2` without any data loss or propagation of corruption.
+- **Telemetry Response:** Exactly on the next rising clock edge following the fault, `sig_fault_det` transitions to high (`1`) and `sig_faulty_core` asserts `1` (`01` in binary), successfully isolating Core A as the corrupted node for the telemetry logs.
+- **350 ns (System Progresses):** While Core A is still broken, the healthy cores (`B` and `C`) transition to State `3`. The system safely moves forward to State `3` on the clock edge, completely unaffected by the failed node.
+- **450 ns (Recovery & Resynchronization):** Core A completes an automatic re-synchronization cycle back to State `3`. The fault monitoring flags automatically clear and return to their healthy baseline status.
+
+---
+
+## 📁 Repository Structure
+- `/src/tmr_voter.vhd` - RTL VHDL design for synchronous majority voting and Fault Detection & Isolation (FDI).
+- `/sim/tb_tmr_voter.vhd` - Complete VHDL testbench generating a 100 MHz clock and modeling run-time fault injection scenarios.
+
+## 🎓 Academic Affiliation
+Developed during summer research at the **Department of Electronic Engineering, Mehran University of Engineering and Technology (MUET)**, Jamshoro, Pakistan.  
+**Author:** Faiza Khoso (Roll No: 23ES011)
