@@ -18,11 +18,11 @@ To bridge the gap between nuclear physics instrumentation and **Hardware Cyber-R
 4. **Self-Healing Capability:** Enables continuous operations with **zero downtime**, transparently mitigating hardware faults in microseconds without data loss.
 
 ## 🗺️ RTL Hardware Circuit Architecture
-The gate-level netlist layout has been fully generated using Xilinx Vivado's Elaborated Design tool. It maps out the exact hardware mapping of the `RTL_AND`, `RTL_OR`, and `RTL_MUX` blocks implementing the synchronous voting and Fault Detection and Isolation (FDI) logic loops.
+The gate-level netlist layout has been fully generated using Xilinx Vivado's Elaborated Design tool. It maps out the exact hardware layout of the AND, OR, and MUX blocks implementing the synchronous voting and Fault Detection and Isolation (FDI) logic loops.
 
 Due to the complex, wide routing paths of the parallel data lines, the high-fidelity vector file is hosted directly in the root directory:
 
-👉 **[View & Download High-Resolution RTL Architecture Diagram (PDF)](schematic.pdf)**
+ **[View & Download High-Resolution RTL Architecture Diagram (PDF)](schematic.pdf)**
 
 ---
 
