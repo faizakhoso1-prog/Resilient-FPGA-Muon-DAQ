@@ -13,7 +13,7 @@
 
 *Implemented on xc7a100tcsg324-1 | Timing closure achieved at 100 MHz | Verified via behavioral simulation with multi-cycle fault injection*
 
-[Architecture](#architecture) · [Simulation Results](#simulation--verification) · [Implementation Data](#silicon-implementation-results) · [Repository Structure](#repository-structure) · [Author](Faiza Khoso)
+[Architecture](#architecture) · [Simulation Results](#simulation--verification) · [Implementation Data](#silicon-implementation-results) · [Repository Structure](#repository-structure) · [Author](#author)
 
 </div>
 
@@ -116,15 +116,9 @@ begin
     end if;
 end process;
 ```
-```markdown
-### Vivado Generated RTL Schematic:
 
-![RTL Schematic](schematic.png)
 ---
-### Single Fault Injection — Original Verification:
 
-![Single Fault Simulation Waveform](docs/waveform_single_fault.png)
-## Simulation & Verification
 
 ### Extended Multi-Cycle Fault Injection Test
 
