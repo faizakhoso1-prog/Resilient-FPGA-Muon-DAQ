@@ -13,7 +13,7 @@
 
 *Implemented on xc7a100tcsg324-1 | Timing closure achieved at 100 MHz | Verified via behavioral simulation with multi-cycle fault injection*
 
-[Architecture](#architecture) · [Simulation Results](#simulation--verification) · [Implementation Data](#silicon-implementation-results) · [Repository Structure](#repository-structure) · [Author](#author)
+[Architecture](#architecture) · [Simulation Results](#simulation--verification) · [Implementation Data](#silicon-implementation-results) · [Repository Structure](#repository-structure) · [Author](Faiza Khoso)
 
 </div>
 
@@ -116,9 +116,14 @@ begin
     end if;
 end process;
 ```
+```markdown
+### Vivado Generated RTL Schematic:
 
+![RTL Schematic](schematic.png)
 ---
+### Single Fault Injection — Original Verification:
 
+![Single Fault Simulation Waveform](docs/waveform_single_fault.png)
 ## Simulation & Verification
 
 ### Extended Multi-Cycle Fault Injection Test
@@ -127,7 +132,7 @@ The testbench (`tb_tmr_voter.vhd`) generates a 100 MHz clock and injects **multi
 
 **Simulation Waveform — 1000 ns Full Test Run:**
 
-![Extended Simulation Waveform](waveform-extended)
+![Extended Simulation Waveform](waveform_extended.png)
 
 *Waveform shows: multiple fault injection events, repeated fault detection (sig_fault_det pulses), faulty core identification cycling through cores 1, 2, 3, and correct voted output maintained throughout.*
 
@@ -172,7 +177,7 @@ Fully synthesized, placed, routed, and **timing-closed** on **xc7a100tcsg324-1 (
 
 > **Significance:** WPWS of 4.500 ns at a 10 ns clock period (100 MHz) means the design has substantial timing margin — the flip-flops could sustain correct operation at nearly **~180–200 MHz** on this device. This confirms the synchronous TMR architecture is not just functionally correct but is also a high-frequency, silicon-proven design.
 
-![Timing Summary](timing_summary_constrained.png)
+![Timing Summary](timing_summary_constrained.jpg)
 
 ### Resource Utilization
 
