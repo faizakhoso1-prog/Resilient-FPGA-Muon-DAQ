@@ -119,6 +119,7 @@ end process;
 
 ---
 
+## Simulation & Verification
 
 ### Extended Multi-Cycle Fault Injection Test
 
@@ -126,7 +127,7 @@ The testbench (`tb_tmr_voter.vhd`) generates a 100 MHz clock and injects **multi
 
 **Simulation Waveform — 1000 ns Full Test Run:**
 
-![Extended Simulation Waveform](waveform_extended.png)
+![Extended Simulation Waveform](docs/waveform_extended.png)
 
 *Waveform shows: multiple fault injection events, repeated fault detection (sig_fault_det pulses), faulty core identification cycling through cores 1, 2, 3, and correct voted output maintained throughout.*
 
@@ -171,7 +172,7 @@ Fully synthesized, placed, routed, and **timing-closed** on **xc7a100tcsg324-1 (
 
 > **Significance:** WPWS of 4.500 ns at a 10 ns clock period (100 MHz) means the design has substantial timing margin — the flip-flops could sustain correct operation at nearly **~180–200 MHz** on this device. This confirms the synchronous TMR architecture is not just functionally correct but is also a high-frequency, silicon-proven design.
 
-![Timing Summary](timing_summary_constrained.jpg)
+![Timing Summary](docs/timing_summary_constrained.png)
 
 ### Resource Utilization
 
@@ -183,7 +184,7 @@ Fully synthesized, placed, routed, and **timing-closed** on **xc7a100tcsg324-1 (
 
 > **Design Significance:** The TMR voter and FDI engine together consume only 7 LUTs and 5 FFs. This ultra-minimal footprint means the resilience layer can be replicated and stacked across multiple protected subsystems (TDC counters, trigger logic, FIFO controllers) with negligible area overhead — critical for scalable fault-tolerant DAQ architectures.
 
-![Utilization Report](utilization.png)
+![Utilization Report](docs/utilization.png)
 
 ### Power Analysis (Implemented Design)
 
@@ -200,7 +201,7 @@ Fully synthesized, placed, routed, and **timing-closed** on **xc7a100tcsg324-1 (
 
 > **Note:** The dominant power consumer is I/O switching (1.748 W), driven by high-speed telemetry output signals during vectorless power analysis. Core logic power is just **33 mW** — confirming the architecture is highly power-efficient for edge and remote deployment environments.
 
-![Power Analysis](power_analysis.png)
+![Power Analysis](docs/power_analysis.png)
 
 ### Comparative Architecture Analysis
 
