@@ -305,8 +305,7 @@ create_clock -period 10.000 -name clk [get_ports clk]
 
 **Author:** Faiza Khoso (Roll No: 23ES011)  
 **Department:** Electronic Engineering  
-**Institution:** Mehran University of Engineering and Technology (MUET), Jamshoro, Pakistan  
-**Faculty Advisor:** Dr. Muhammad Zaigham Abbas Shah, Associate Professor  
+**Institution:** Mehran University of Engineering and Technology (MUET), Jamshoro, Pakistan    
 
 *This work was conducted as independent summer research (2026) and is integrated into the author's Final Year Project: "Radiation-Hardened FPGA DAQ System for Cosmic Ray Muon Detection."*
 
@@ -314,7 +313,6 @@ create_clock -period 10.000 -name clk [get_ports clk]
 
 ## Future Work
 
-- [x] ~~Add XDC timing constraints for 100 MHz clock~~ — **Done. All constraints met. WPWS: 4.500 ns.**
 - [ ] Implement scrubbing controller for automatic Core A/B/C resynchronization via partial reconfiguration
 - [ ] Extend TMR protection to TDC counter modules in the full DAQ system
 - [ ] Explore Xilinx Dynamic Function eXchange (DFX) for runtime reconfiguration-based fault recovery — moving toward cyber-resilient SoC compartmentalization
